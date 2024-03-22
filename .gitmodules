@@ -1,0 +1,4 @@
+[submodule "atmoseer"]
+	path = atmoseer
+	url = https://github.com/NietoCurcio/atmoseer
+  branch = NietoCurcio
