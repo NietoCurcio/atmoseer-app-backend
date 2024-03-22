@@ -1,0 +1,1 @@
+from app.services.DogsService import dogs_service
