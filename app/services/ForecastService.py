@@ -1,35 +1,43 @@
-import subprocess
-import os
+from .interfaces.AtmoseerService import AtmoseerService
 
-from .interfaces.Service import Service
 from app.exceptions.Exceptions import InternalServerError
-from app.Logger import logger
+from app.helpers.Logger import logger
+
+from atmoseer.src.predict_oc import predict_oc
 
 log = logger.get_logger(__name__)
 
-class ForecastService(Service):
+class ForecastService(AtmoseerService):
     def __init__(self) -> None:
-        pass
-
-    def _set_atmoseer_working_dir(self, working_dir: str) -> str:
-        current_workdir = os.getcwd()
-        os.chdir(working_dir)
-        return current_workdir
+        super().__init__()
+        self.current_workdir = self.path_helper.get_current_workdir()
 
     def get_data(self):
-        script_path = "src/predict_oc.py"
+        self.path_helper.set_wordkir(working_dir="atmoseer")
         try:
-            current_workdir = self._set_atmoseer_working_dir('atmoseer')
-            process = subprocess.run(
-                ["python", script_path],
-                check=True,
-                stdout=subprocess.PIPE, text=True
+            pipeline_id = 'A652_A621_A636_A627'
+            prediction_task_sufix = "oc"
+
+            log.info(f"""
+                Running predict_oc function:
+                pipeline_id: {pipeline_id}
+                prediction_task_sufix: {prediction_task_sufix}
+            """)
+
+            predict_result = predict_oc(
+                pipeline_id=pipeline_id,
+                prediction_task_sufix=prediction_task_sufix
             )
-            log.info(f"Output of {script_path}:\n{process.stdout}")
-            self._set_atmoseer_working_dir(current_workdir)
-        except subprocess.CalledProcessError as e:
-            message = f"Error running the {script_path} script"
+            return {
+                "message": f"Prediction result: {predict_result}"
+            }
+        except Exception as e:
+            built_workdir = self.path_helper.set_wordkir('atmoseer')
+            fn_name = predict_oc.__name__
+            message = f"Error running {fn_name} function in {built_workdir}"
             log.error(f"{message}: {e}")
             raise InternalServerError(message=message, error=e)
-
+        finally:
+            self.path_helper.set_wordkir(working_dir=str(self.current_workdir))
+        
 forecast_service = ForecastService()
