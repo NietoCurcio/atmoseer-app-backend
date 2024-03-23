@@ -32,7 +32,7 @@ class ForecastService(AtmoseerService):
                 "message": f"Prediction result: {predict_result}"
             }
         except Exception as e:
-            built_workdir = self.path_helper.set_wordkir('atmoseer')
+            built_workdir = self.path_helper.build_workdir('atmoseer')
             fn_name = predict_oc.__name__
             message = f"Error running {fn_name} function in {built_workdir}"
             log.error(f"{message}: {e}")
