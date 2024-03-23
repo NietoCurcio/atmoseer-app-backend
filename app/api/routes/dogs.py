@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.Logger import logger
+from app.helpers.Logger import logger
 from app.services import dogs_service
 
 log = logger.get_logger(__name__)

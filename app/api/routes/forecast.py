@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from app.Logger import logger
+from app.helpers.Logger import logger
 from app.services import forecast_service
 
 log = logger.get_logger(__name__)
