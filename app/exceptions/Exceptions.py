@@ -7,24 +7,12 @@ from starlette.status import (
 
 class BadRequest(BaseHTTPException):
     def __init__(self, message: str, error: Exception = None):
-        super(BadRequest, self).__init__(
-            status_code=HTTP_400_BAD_REQUEST,
-            message=message,
-            error=error
-        )
+        super().__init__(status_code=HTTP_400_BAD_REQUEST, message=message, error=error)
 
 class InternalServerError(BaseHTTPException):
     def __init__(self, message: str, error: Exception = None):
-        super(InternalServerError, self).__init__(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR,
-            message=message,
-            error=error
-        )
+        super().__init__(status_code=HTTP_500_INTERNAL_SERVER_ERROR, message=message, error=error)
 
 class Unauthorized(BaseHTTPException):
     def __init__(self, message: str, error: Exception = None):
-        super(Unauthorized, self).__init__(
-            status_code=HTTP_401_UNAUTHORIZED,
-            message=message,
-            error=error
-        )
+        super().__init__(status_code=HTTP_401_UNAUTHORIZED, message=message, error=error)
