@@ -8,6 +8,11 @@ git clone https://github.com/NietoCurcio/atmoseer-app-backend.git
 cd atmoseer-app-backend
 ```
 
+Initialize atmoseer project
+```sh
+git submodule update --init
+```
+
 Install [pipenv](https://github.com/pypa/pipenv)
 ```sh
 pip install pipenv
