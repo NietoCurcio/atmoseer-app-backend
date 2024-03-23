@@ -1,6 +1,6 @@
 # Atmoseer app backend
 
-## Usage
+## Get started
 
 Clone the repository
 ```sh
@@ -23,17 +23,22 @@ pipenv run start
 # INFO:     Application startup complete.
 ```
 
+Documentation
+
+- Interactive API docs http://localhost:3333/docs
+- Alternative API docs http://localhost:3333/redoc
+
 ## Project structure
 
 ```
 atmoseer-app-backend/
+├── .env.example
+├── .gitmodules
 ├── README.md
-├── atmoseer # MLRG-CEFET-RJ/atmoseer submodule
 └── app/
     ├── app.py
     ├── config.py
-    ├── Logger.py
-    └── main.py
+    ├── main.py
     ├── api/
     │   ├── router.py
     │   └── routes/
@@ -41,15 +46,18 @@ atmoseer-app-backend/
     │       └── forecast.py
     ├── exceptions/
     │   └── Exceptions.py
+    ├── helpers/
+    │   ├── Logger.py
+    │   └── PathHelper.py
     └── services/
         ├── DogsService.py
         ├── ForecastService.py
         └── interfaces/
+            ├── AtmoseerService.py
             └── Service.py
 ```
 
-The source code of the backend is in the `app` folder. The `atmoseer` folder is a submodule, it has its own git repostiory at [NietoCurcio/atmoseer Github](https://github.com/NietoCurcio/atmoseer). The `atmoseer` submodule is necessary to use the machine learning algorithms developed CEFET-RJ 
-Machine Learning Research Group.
+The source code of the backend is in the `app` folder. The `atmoseer` folder is a submodule, it has its own git repostiory at [NietoCurcio/atmoseer Github](https://github.com/NietoCurcio/atmoseer). The `atmoseer` submodule is necessary to use the machine learning algorithms developed by the CEFET-RJ Machine Learning Research Group.
 
 - Endpoints
 
