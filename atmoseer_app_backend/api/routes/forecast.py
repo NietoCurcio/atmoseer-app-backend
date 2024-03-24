@@ -2,8 +2,8 @@ from typing import Annotated
 
 from fastapi import APIRouter, Query
 
-from app.helpers.Logger import logger
-from app.services import forecast_service
+from atmoseer_app_backend.helpers.Logger import logger
+from atmoseer_app_backend.services import forecast_service
 
 log = logger.get_logger(__name__)
 

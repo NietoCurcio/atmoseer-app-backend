@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from app.helpers.Logger import logger
-from app.services import dogs_service
+from atmoseer_app_backend.helpers.Logger import logger
+from atmoseer_app_backend.services import dogs_service
 
 log = logger.get_logger(__name__)
 

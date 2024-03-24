@@ -13,15 +13,21 @@ Initialize atmoseer project
 git submodule update --init
 ```
 
-Install [pipenv](https://github.com/pypa/pipenv)
-```sh
-pip install pipenv
-```
+Install [poetry](https://github.com/python-poetry/poetry). 
+  - Linux and macOS
+    ```sh
+    curl -sSL https://install.python-poetry.org | python3 -
+    ```
+
+  - Windows powershell
+    ```sh
+    (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+    ```
 
 Install project dependencies and start the server:
 ```sh
-pipenv install
-pipenv run start
+poetry install
+poetry run start
 
 # INFO:     Uvicorn running on http://127.0.0.1:3333 (Press CTRL+C to quit)
 # ...
@@ -39,8 +45,11 @@ Documentation
 atmoseer-app-backend/
 ├── .env.example
 ├── .gitmodules
+├── poetry.lock
+├── pyproject.toml
 ├── README.md
-└── app/
+├── atmoseer/
+└── atmoseer_app_backend/
     ├── app.py
     ├── config.py
     ├── main.py

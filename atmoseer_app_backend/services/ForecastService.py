@@ -1,8 +1,7 @@
 from .interfaces.AtmoseerService import AtmoseerService
 
-from app.exceptions.Exceptions import InternalServerError
-from app.helpers.Logger import logger
-
+from atmoseer_app_backend.exceptions.Exceptions import InternalServerError
+from atmoseer_app_backend.helpers.Logger import logger
 from atmoseer.src.predict_oc import predict_oc
 
 log = logger.get_logger(__name__)
@@ -13,7 +12,7 @@ class ForecastService(AtmoseerService):
         self.current_workdir = self.path_helper.get_current_workdir()
 
     def get_data(self):
-        self.path_helper.set_wordkir(working_dir="atmoseer")
+        self.path_helper.set_wordkir("atmoseer")
         try:
             pipeline_id = 'A652_A621_A636_A627'
             prediction_task_sufix = "oc"
@@ -38,6 +37,6 @@ class ForecastService(AtmoseerService):
             log.error(f"{message}: {e}")
             raise InternalServerError(message=message, error=e)
         finally:
-            self.path_helper.set_wordkir(working_dir=str(self.current_workdir))
+            self.path_helper.set_wordkir(str(self.current_workdir))
         
 forecast_service = ForecastService()

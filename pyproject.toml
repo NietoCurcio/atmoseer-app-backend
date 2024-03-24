@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "atmoseer-app-backend"
+version = "0.1.0"
+description = "Atmoseer backend"
+authors = ["Felipe Curcio <felipe_nieto010@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+requests = "^2.31.0"
+pydantic-settings = "^2.2.1"
+torch = "^2.2.1"
+numpy = "^1.26.4"
+scikit-learn = "^1.4.1.post1"
+pandas = "^2.2.1"
+matplotlib = "^3.8.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = 'atmoseer_app_backend.main:main'
