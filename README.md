@@ -13,7 +13,7 @@ Initialize atmoseer project
 git submodule update --init --progress
 ```
 
-Install [poetry](https://github.com/python-poetry/poetry). 
+Install [poetry](https://github.com/python-poetry/poetry) dependency manager.
   - Linux and macOS
     ```sh
     curl -sSL https://install.python-poetry.org | python3 -
