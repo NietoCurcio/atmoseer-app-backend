@@ -10,7 +10,7 @@ cd atmoseer-app-backend
 
 Initialize atmoseer project
 ```sh
-git submodule update --init
+git submodule update --init --progress
 ```
 
 Install [poetry](https://github.com/python-poetry/poetry). 
