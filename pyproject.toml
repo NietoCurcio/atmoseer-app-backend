@@ -19,6 +19,7 @@ pandas = "^2.2.1"
 matplotlib = "^3.8.3"
 sqlmodel = "^0.0.16"
 psycopg2 = "^2.9.9"
+alembic = "^1.13.1"
 
 
 [build-system]
