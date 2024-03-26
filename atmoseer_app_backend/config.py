@@ -18,6 +18,14 @@ class Settings(BaseSettings):
     ENV: str = ENVs.DEV.value
     TOKEN_INMET: str | None = None
 
+    POSTGRES_USER: str = "postgres"
+    POSTGRES_PASSWORD: str = "password"
+    POSTGRES_SERVER: str = "localhost"
+    POSTGRES_PORT: str = "5432"
+    POSTGRES_DB: str = "atmoseer"
+    PGADMIN_DEFAULT_EMAIL: str = "pgadmin4@pgadmin.org"
+    PGADMIN_DEFAULT_PASSWORD: str = "admin"
+
     @model_validator(mode="after")
     def _validate_env(self):
         if self.ENV in ENVs: return self

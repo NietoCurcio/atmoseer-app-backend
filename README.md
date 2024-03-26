@@ -24,11 +24,24 @@ Install [poetry](https://github.com/python-poetry/poetry) dependency manager.
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
     ```
 
-Install project dependencies and start the server:
+Install project dependencies:
 ```sh
 poetry install
-poetry run start
 
+# Creating virtualenv atmoseer-app-backend-...
+# Installing dependencies from lock file
+# ...
+# Installing the current project: atmoseer-app-backend (0.1.0)
+```
+
+Start a local instance of PostgreSQL with [Docker](https://hub.docker.com/_/postgres):
+```sh
+docker compose up
+```
+
+Start the server:
+```sh
+poetry run start
 # INFO:     Uvicorn running on http://127.0.0.1:3333 (Press CTRL+C to quit)
 # ...
 # INFO:     Application startup complete.
