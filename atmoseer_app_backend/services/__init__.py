@@ -1,2 +1,2 @@
-from atmoseer_app_backend.services.DogsService import dogs_service
-from atmoseer_app_backend.services.ForecastService import forecast_service
+from .DogsService import dogs_service
+from .ForecastService import forecast_service
