@@ -11,7 +11,7 @@ router = APIRouter()
 @router.get("/")
 async def read_heros(hero_service: HeroService = Depends(HeroService)):
     log.info("Getting heros data")
-    return hero_service.get_data()
+    return hero_service.read_all()
 
 @router.post("/")
 async def create_hero(hero: HeroCreate, hero_service: HeroService = Depends(HeroService)) -> HeroOut:

@@ -2,6 +2,7 @@ from fastapi import Depends
 
 from atmoseer_app_backend.models.Hero import HeroCreate, Hero
 from atmoseer_app_backend.repositories import HeroRepository, Repository
+from .exceptions.Exceptions import BadRequest
 from .interfaces.Service import Service
 
 class HeroService(Service):
@@ -13,3 +14,7 @@ class HeroService(Service):
     
     def create(self, hero: HeroCreate) -> Hero:
         return self.repository.create(hero)
+    
+    def read_all(self) -> list[Hero]:
+        raise BadRequest('Not implemented')
+        return self.repository.read_all()
