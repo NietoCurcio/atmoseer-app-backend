@@ -100,3 +100,17 @@ The source code of the backend is in the `app` folder. The `atmoseer` folder is 
 - Endpoints
 
 - Services
+
+## Technologies
+
+### Docker
+
+Removing all containers:
+```sh
+docker rm -f $(docker ps -a -q)
+```
+
+Removing all volumes:
+```sh
+docker volume rm $(docker volume ls -q)
+```
