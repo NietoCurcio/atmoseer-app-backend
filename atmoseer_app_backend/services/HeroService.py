@@ -2,8 +2,9 @@ from fastapi import Depends
 
 from atmoseer_app_backend.models.Hero import HeroCreate, Hero
 from atmoseer_app_backend.repositories import HeroRepository, Repository
+
 from .exceptions import BadRequest
-from .interfaces.Service import Service
+from .interfaces import Service
 
 class HeroService(Service):
     def __init__(self, repository: Repository = Depends(HeroRepository)) -> None:

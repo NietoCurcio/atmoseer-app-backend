@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
 
 from atmoseer_app_backend.helpers.Logger import logger
-from atmoseer_app_backend.services.HeroService import HeroService, Service
+from atmoseer_app_backend.services.interfaces import Service
+from atmoseer_app_backend.services.HeroService import HeroService
 from atmoseer_app_backend.models.Hero import HeroCreate, HeroOut
 
 log = logger.get_logger(__name__)
@@ -13,8 +14,9 @@ async def read_heros(hero_service: HeroService = Depends(HeroService)):
     log.info("Getting heros data")
     return hero_service.read_all()
 
-@router.post("/")
+@router.post("/") 
 async def create_hero(hero: HeroCreate, hero_service: HeroService = Depends(HeroService)) -> HeroOut:
+    # TODO use Service interface instead of HeroService as type, improve services and repos interfaces
     log.info("Creating hero")
     return hero_service.create(hero)
 

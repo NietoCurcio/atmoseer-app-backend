@@ -1,4 +1,4 @@
-from .Service import Service as Service
+from .Service import Service
 from atmoseer_app_backend.helpers.PathHelper import path_helper
 
 class AtmoseerService(Service):

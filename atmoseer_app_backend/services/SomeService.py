@@ -1,4 +1,4 @@
-from .interfaces.Service import Service
+from .interfaces import Service
 
 from atmoseer_app_backend.repositories import (
     some_repository, Repository
