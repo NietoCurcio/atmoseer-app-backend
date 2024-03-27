@@ -2,7 +2,7 @@ from fastapi import Depends
 
 from atmoseer_app_backend.models.Hero import HeroCreate, Hero
 from atmoseer_app_backend.repositories import HeroRepository, Repository
-from .exceptions.Exceptions import BadRequest
+from .exceptions import BadRequest
 from .interfaces.Service import Service
 
 class HeroService(Service):

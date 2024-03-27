@@ -3,7 +3,7 @@ from .interfaces.AtmoseerService import AtmoseerService
 from atmoseer_app_backend.helpers.Logger import logger
 from atmoseer.src.predict_oc import predict_oc
 
-from .exceptions.Exceptions import InternalServerError
+from .exceptions import InternalServerError
 
 log = logger.get_logger(__name__)
 

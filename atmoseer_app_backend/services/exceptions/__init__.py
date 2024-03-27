@@ -1,6 +1,11 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from abc import ABC
+from .exceptions import (
+    BadRequest,
+    InternalServerError,
+    Unauthorized
+)
 
 class BaseHTTPException(ABC, Exception):
     def __init__(self, status_code: int, message: str, error: Exception = None):
