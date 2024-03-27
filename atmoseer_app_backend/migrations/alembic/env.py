@@ -29,13 +29,6 @@ target_metadata = None
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-def get_url():
-    user = settings.POSTGRES_USER
-    password = settings.POSTGRES_PASSWORD
-    server = settings.POSTGRES_SERVER
-    port = settings.POSTGRES_PORT
-    db = settings.POSTGRES_DB
-    return f"postgresql+psycopg2://{user}:{password}@{server}:{port}/{db}"
 
 
 def run_migrations_offline() -> None:
@@ -69,11 +62,8 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    print('ate aqui ok 1')
     configuration = config.get_section(config.config_ini_section)
-    print('ate aqui ok 2')
-    configuration["sqlalchemy.url"] = get_url()
-    print('ate aqui ok 3')
+    configuration["sqlalchemy.url"] = str(settings.POSTGRES_URL)
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",

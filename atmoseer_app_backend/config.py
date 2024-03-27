@@ -1,6 +1,7 @@
 from enum import Enum
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import model_validator
+from pydantic import model_validator, PostgresDsn
+from pydantic_core import MultiHostUrl
 
 from atmoseer_app_backend.helpers.Logger import logger
 
@@ -19,12 +20,21 @@ class Settings(BaseSettings):
     TOKEN_INMET: str | None = None
 
     POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "password"
+    POSTGRES_PASSWORD: str = "changeme"
     POSTGRES_SERVER: str = "localhost"
-    POSTGRES_PORT: str = "5432"
+    POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "atmoseer"
     PGADMIN_DEFAULT_EMAIL: str = "pgadmin4@pgadmin.org"
     PGADMIN_DEFAULT_PASSWORD: str = "admin"
+
+    POSTGRES_URL: PostgresDsn = MultiHostUrl.build(
+        scheme="postgresql+psycopg2",
+        username=POSTGRES_USER,
+        password=POSTGRES_PASSWORD,
+        host=POSTGRES_SERVER,
+        port=POSTGRES_PORT,
+        path=POSTGRES_DB
+    )
 
     @model_validator(mode="after")
     def _validate_env(self):

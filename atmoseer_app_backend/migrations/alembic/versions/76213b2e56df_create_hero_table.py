@@ -1,8 +1,8 @@
-"""create account table
+"""create hero table
 
-Revision ID: de9b18091887
+Revision ID: 76213b2e56df
 Revises: 
-Create Date: 2024-03-26 00:20:17.866398
+Create Date: 2024-03-26 18:54:59.684116
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'de9b18091887'
+revision: str = '76213b2e56df'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -20,12 +20,13 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.create_table(
-        'account',
+        'hero',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('name', sa.String(50), nullable=False),
-        sa.Column('description', sa.Unicode(200)),
+        sa.Column('secret_name', sa.String(50)),
+        sa.Column('age', sa.Integer, nullable=True)
     )
 
 
 def downgrade() -> None:
-    op.drop_table('account')
+    op.drop_table('hero')
