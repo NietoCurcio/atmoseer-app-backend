@@ -69,33 +69,48 @@ Documentation
 atmoseer-app-backend/
 ├── .env.example
 ├── .gitmodules
+├── alembic.ini
+├── docker-compose.yml
 ├── poetry.lock
 ├── pyproject.toml
 ├── README.md
-├── atmoseer/
-└── atmoseer_app_backend/
+├── atmoseer
+└── atmoseer_app_backend
+    ├── main.py
     ├── app.py
     ├── config.py
-    ├── main.py
-    ├── api/
-    │   ├── router.py
-    │   └── routes/
-    │       ├── dogs.py
-    │       └── forecast.py
-    ├── exceptions/
-    │   └── Exceptions.py
-    ├── helpers/
+    ├── helpers
     │   ├── Logger.py
     │   └── PathHelper.py
-    └── services/
-        ├── DogsService.py
-        ├── ForecastService.py
-        └── interfaces/
-            ├── AtmoseerService.py
-            └── Service.py
+    ├── migrations
+    │   └── alembic
+    │       ├── env.py
+    │       └── versions
+    ├── models
+    │   └── Hero.py
+    ├── repositories
+    │   ├── HeroRepository.py
+    │   ├── database
+    │   │   └── database.py
+    │   └── interfaces
+    │       └── Repository.py
+    ├── services
+    │   ├── ForecastService.py
+    │   ├── HeroService.py
+    │   ├── SomeService.py
+    │   ├── exceptions
+    │   │   └── exceptions.py
+    │   └── interfaces
+    │       ├── AtmoseerService.py
+    │       └── Service.py
+    └── api
+        ├── router.py
+        └── routes
+            ├── forecast.py
+            └── heros.py
 ```
 
-The source code of the backend is in the `app` folder. The `atmoseer` folder is a submodule, it has its own git repostiory at [NietoCurcio/atmoseer Github](https://github.com/NietoCurcio/atmoseer). The `atmoseer` submodule is necessary to use the machine learning algorithms developed by the CEFET-RJ Machine Learning Research Group.
+The source code of the backend is in the `atmoseer_app_backend` folder. The `atmoseer` folder is a submodule, it has its own git repostiory at [NietoCurcio/atmoseer Github](https://github.com/NietoCurcio/atmoseer). The `atmoseer` submodule is necessary to use the machine learning algorithms developed by the CEFET-RJ Machine Learning Research Group.
 
 - Endpoints
 
