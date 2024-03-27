@@ -1,4 +1,4 @@
-from . import BaseHTTPException
+from .BaseHTTPException import BaseHTTPException
 from starlette.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_401_UNAUTHORIZED,

@@ -1,17 +1,13 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from abc import ABC
+
+from atmoseer_app_backend.services.exceptions.BaseHTTPException import BaseHTTPException
+
 from .exceptions import (
     BadRequest,
     InternalServerError,
     Unauthorized
 )
-
-class BaseHTTPException(ABC, Exception):
-    def __init__(self, status_code: int, message: str, error: Exception = None):
-        self.status_code = status_code
-        self.message = message
-        self.error = error
 
 def add_custom_exception_handler(app: FastAPI):
     @app.exception_handler(BaseHTTPException)
