@@ -1,6 +1,6 @@
 from fastapi import Depends
 
-from atmoseer_app_backend.models.Hero import HeroCreate, HeroOut
+from atmoseer_app_backend.models.Hero import HeroCreate, Hero
 from atmoseer_app_backend.repositories import HeroRepository, Repository
 from .interfaces.Service import Service
 
@@ -11,5 +11,5 @@ class HeroService(Service):
     def get_data(self):
         return self.my_data.get_my_data()
     
-    def create(self, hero: HeroCreate) -> HeroOut:
+    def create(self, hero: HeroCreate) -> Hero:
         return self.repository.create(hero)
