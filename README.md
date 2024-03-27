@@ -39,6 +39,17 @@ Start a local instance of PostgreSQL with [Docker](https://hub.docker.com/_/post
 docker compose up
 ```
 
+Run [alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html) database migrations:
+```sh
+alembic upgrade head
+
+# INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+# INFO  [alembic.runtime.migration] Will assume transactional DDL.
+# INFO  [alembic.runtime.migration] Running upgrade  -> 76213b2e56df, create hero table
+
+# to undo all migrations run 'alembic downgrade base'
+```
+
 Start the server:
 ```sh
 poetry run start
