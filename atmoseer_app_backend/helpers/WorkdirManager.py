@@ -1,8 +1,7 @@
 import os
-import sys
 from pathlib import Path
 
-class PathHelper:
+class WorkdirManager:
     def get_current_workdir(self) -> Path:
         current_workdir = Path.cwd()
         return current_workdir.resolve()
@@ -17,8 +16,5 @@ class PathHelper:
         if not target_dir.exists():
             raise FileNotFoundError(f"Path {target_dir} does not exist")
         return target_dir.resolve()
-    
-    def add_path_in_sys_path(self, path: Path):
-        sys.path.append(str(path))
 
-path_helper = PathHelper()
+workdir_manager = WorkdirManager()
