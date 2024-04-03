@@ -2,7 +2,7 @@ import logging
 
 class Logger:
     def __init__(self):
-        self.logger = logging.getLogger('')
+        self.logger = logging.getLogger('log')
         self.logger.setLevel(logging.DEBUG)
         handler = logging.StreamHandler()
         handler.setFormatter(logging.Formatter(
