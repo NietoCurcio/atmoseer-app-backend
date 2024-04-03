@@ -32,4 +32,4 @@ class GeoStationReader:
                     longitude=float(longitude)
                 )
 
-geo_station_reader = GeoStationReader("stations.csv")
+geo_station_reader = GeoStationReader("./atmoseer_app_backend/helpers/stations.csv")

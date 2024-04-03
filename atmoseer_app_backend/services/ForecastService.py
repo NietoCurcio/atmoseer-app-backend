@@ -18,11 +18,13 @@ class ForecastService(AtmoseerService):
         self.workdir_manager = workdir_manager
         self.current_workdir = self.workdir_manager.get_current_workdir()
 
-    def get_data(self):
-        self.workdir_manager.set_wordkir("atmoseer")
+    def get_data(self, latitude: float, longitude: float):
         try:
             pipeline_id = 'A652_A621_A636_A627'
             prediction_task_sufix = "oc"
+
+            station = geo_stations.get_nearest_station(latitude, longitude)
+            print(station)
 
             log.info(f"""
                 Running predict_oc function:
@@ -30,6 +32,7 @@ class ForecastService(AtmoseerService):
                 prediction_task_sufix: {prediction_task_sufix}
             """)
 
+            self.workdir_manager.set_wordkir("atmoseer")
             predict_result = predict_oc(
                 pipeline_id=pipeline_id,
                 prediction_task_sufix=prediction_task_sufix
@@ -38,9 +41,9 @@ class ForecastService(AtmoseerService):
                 "message": f"Prediction result: {predict_result}"
             }
         except Exception as e:
-            built_workdir = self.workdir_manager.build_workdir('atmoseer')
+            workdir = self.workdir_manager.get_current_workdir()
             fn_name = predict_oc.__name__
-            message = f"Error running {fn_name} function in {built_workdir}"
+            message = f"Error running {fn_name} function in {workdir}"
             log.error(f"{message}: {e}")
             raise InternalServerError(message=message, error=e)
         finally:
