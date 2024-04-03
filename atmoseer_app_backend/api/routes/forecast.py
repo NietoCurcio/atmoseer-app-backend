@@ -29,4 +29,4 @@ async def forecast_latitude_longitude(
     ]
 ):
     log.info(f"Forecasting latitude {latitude} and longitude {longitude}")
-    return forecast_service.get_data(latitude, longitude)
+    return await forecast_service.get_data(latitude, longitude)
