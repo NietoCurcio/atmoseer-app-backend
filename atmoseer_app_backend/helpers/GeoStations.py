@@ -24,16 +24,16 @@ class GeoStations(Collection):
     def __len__(self) -> int:
         return sum(1 for _ in self.geo_station_reader.csv_row_generator())
 
-    def get_nearest_station(self, latitude: float, longitude: float) -> str:
+    def get_nearest_station(self, latitude: float, longitude: float) -> Station:
         min_distance = float('inf')
-        nearest_station_name = None
+        nearest_station = None
         for station in self:
             distance = self.great_circle_distance.get_distance(
                 latitude, longitude, station.latitude, station.longitude
             )
             if distance < min_distance:
                 min_distance = distance
-                nearest_station_name = station.station_name
-        return nearest_station_name
+                nearest_station = station
+        return nearest_station
 
 geo_stations = GeoStations(great_circle_distance, geo_station_reader)
