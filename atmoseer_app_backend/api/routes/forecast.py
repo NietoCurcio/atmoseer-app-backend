@@ -22,7 +22,7 @@ async def forecast_latitude_longitude(
     longitude: Annotated[
         float,
         Query(
-            title="Query string dalezadaaa",
+            title="Longitude to forecast",
             ge=-90,
             le=90
         )

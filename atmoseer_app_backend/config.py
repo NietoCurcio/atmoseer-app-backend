@@ -36,6 +36,11 @@ class Settings(BaseSettings):
         path=POSTGRES_DB
     )
 
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:5173",
+        "http://localhost:3000"
+    ]
+
     @model_validator(mode="after")
     def _validate_env(self):
         if self.ENV in ENVs: return self

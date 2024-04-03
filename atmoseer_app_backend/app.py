@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from atmoseer_app_backend.config import settings
 from atmoseer_app_backend.api.router import api_router
 from atmoseer_app_backend.services.exceptions import add_custom_exception_handler
 
@@ -11,9 +12,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-    ],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
