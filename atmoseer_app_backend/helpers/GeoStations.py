@@ -13,9 +13,10 @@ class GeoStations(Collection):
         self.great_circle_distance = great_circle_distance
         self.geo_station_reader = geo_station_reader
 
-    def __contains__(self, name: str) -> bool:
-        for row in self.geo_station_reader.csv_row_generator():
-            if row.station_name == name: return True
+    def __contains__(self, station_id_or_name: str) -> bool:
+        for station in self.geo_station_reader.csv_row_generator():
+            if station.station_id == station_id_or_name or station.name == station_id_or_name:
+                return True
         return False
     
     def __iter__(self) -> Iterator[Station]:
