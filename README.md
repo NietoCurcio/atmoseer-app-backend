@@ -8,7 +8,7 @@ git clone https://github.com/NietoCurcio/atmoseer-app-backend.git
 cd atmoseer-app-backend
 ```
 
-Initialize atmoseer project
+Initialize [atmoseer](https://github.com/MLRG-CEFET-RJ/atmoseer) [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 ```sh
 git submodule update --init --progress
 ```
@@ -81,7 +81,15 @@ atmoseer-app-backend/
     ├── config.py
     ├── helpers
     │   ├── Logger.py
-    │   └── PathHelper.py
+    │   ├── PathHelper.py
+    │   ├── AsyncExecutor.py
+    │   ├── GeoStationReader.py
+    │   ├── GeoStations.py
+    │   ├── GreatCircleDistance.py
+    │   ├── WeatherStations.csv
+    │   ├── WorkdirManager.py
+    │   └── models
+    │       └── Station.py
     ├── migrations
     │   └── alembic
     │       ├── env.py
@@ -97,7 +105,6 @@ atmoseer-app-backend/
     ├── services
     │   ├── ForecastService.py
     │   ├── HeroService.py
-    │   ├── SomeService.py
     │   ├── exceptions
     │   │   └── exceptions.py
     │   └── interfaces
