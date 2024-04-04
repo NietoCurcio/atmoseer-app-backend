@@ -8,8 +8,6 @@ from atmoseer.src.predict_oc import predict_oc
 from .interfaces import AtmoseerService
 from .exceptions import InternalServerError
 
-log = logger.get_logger(__name__)
-
 class ForecastService(AtmoseerService):
     def __init__(
         self,
@@ -28,7 +26,7 @@ class ForecastService(AtmoseerService):
 
             station = self.geo_stations.get_nearest_station(latitude, longitude)
 
-            log.info(f"""
+            logger.info(f"""
                 Nearest station to lat {latitude} long {longitude}:
                 name: {station.name}
                 situation: {station.situation}
@@ -37,7 +35,7 @@ class ForecastService(AtmoseerService):
                 id: {station.station_id}
             """)
 
-            log.info(f"""
+            logger.info(f"""
                 Running predict_oc function:
                 pipeline_id: {station.station_id}
                 prediction_task_sufix: {prediction_task_sufix}
@@ -57,7 +55,7 @@ class ForecastService(AtmoseerService):
             workdir = self.workdir_manager.get_current_workdir()
             fn_name = predict_oc.__name__
             message = f"Error running {fn_name} function in {workdir}"
-            log.error(f"{message}: {e}")
+            logger.error(f"{message}: {e}")
             raise InternalServerError(message=message, error=e)
         finally:
             self.workdir_manager.set_wordkir(str(self.current_workdir))

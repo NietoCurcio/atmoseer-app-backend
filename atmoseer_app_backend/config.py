@@ -44,7 +44,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _validate_env(self):
         if self.ENV in ENVs: return self
-        logger.get_logger(__name__).warning(f'Invalid ENV: {self.ENV}. Setting to "{ENVs.DEV.value}"')
+        logger.warning(f'Invalid ENV: {self.ENV}. Setting to "{ENVs.DEV.value}"')
         self.ENV = ENVs.DEV.value
         return self
 

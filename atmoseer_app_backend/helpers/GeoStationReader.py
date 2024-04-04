@@ -6,8 +6,6 @@ from collections.abc import Generator
 from .Logger import logger
 from .models.Station import Station
 
-log = logger.get_logger(__name__)
-
 class GeoStationReader:
     def __init__(self, geo_stations_path: str) -> None:
         self.geo_stations_path = self._initialize_geo_stations_path(geo_stations_path)
@@ -44,7 +42,7 @@ class GeoStationReader:
 
             return Station(**station)
         except Exception as e:
-            log.error(f"Error creating Station: {e}")
+            logger.error(f"Error creating Station: {e}")
             raise e
 
     def csv_row_generator(
@@ -65,7 +63,7 @@ class GeoStationReader:
             for row in csv_reader:
                 yield self._create_station(row, ignore_first_column)
         except Exception as e:
-            log.error(f"Error reading CSV file '{file_path}': {e}")
+            logger.error(f"Error reading CSV file '{file_path}': {e}")
             raise e
         finally:
             csvfile.close()
