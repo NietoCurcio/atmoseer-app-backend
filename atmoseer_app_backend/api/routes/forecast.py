@@ -23,8 +23,8 @@ async def forecast_latitude_longitude(
         float,
         Query(
             title="Longitude to forecast",
-            ge=-90,
-            le=90
+            ge=-180,
+            le=180
         )
     ]
 ):
