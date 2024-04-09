@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 
 PATHS = [
-    'atmoseer',
-    os.path.join('atmoseer', 'src'),
+    "atmoseer",
+    os.path.join("atmoseer", "src"),
 ]
+
 
 def configure_paths(paths: list[str]):
     for path in paths:
@@ -19,5 +20,6 @@ def configure_paths(paths: list[str]):
         except Exception as e:
             print(f"Error adding {path} to sys.path: {e}")
             exit(1)
+
 
 configure_paths(PATHS)

@@ -1,9 +1,11 @@
 from fastapi import Depends
 from sqlmodel import Session
 
-from atmoseer_app_backend.models.Hero import HeroCreate, Hero
-from .interfaces import Repository
+from atmoseer_app_backend.models.Hero import Hero, HeroCreate
+
 from .database import get_session
+from .interfaces import Repository
+
 
 class HeroRepository(Repository):
     def __init__(self, session: Session = Depends(get_session)) -> None:

@@ -22,9 +22,33 @@ psycopg2 = "^2.9.9"
 alembic = "^1.13.1"
 
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.5"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = 'atmoseer_app_backend.main:main'
+
+[tool.ruff]
+target-version = "py312"
+exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle
+    "F", # flake8
+    "I", # isort
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line too long
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
