@@ -136,3 +136,30 @@ Removing all volumes:
 ```sh
 docker volume rm $(docker volume ls -q)
 ```
+
+### Ruff
+
+[Ruff](https://github.com/astral-sh/ruff) linter and code formatter. Ruff is used by major projects like pandas, Jupyter, PyTorch, SciPy etc.
+
+Run ruff linter:
+```sh
+poetry run ruff check atmoseer_app_backend --fix 
+```
+
+Run ruff formatter:
+```sh
+poetry run ruff format atmoseer_app_backend
+```
+
+We can use [Ruff vscode extension](https://github.com/astral-sh/ruff-vscode). After installing the extension, we can configure Ruff extension to lint and format code on vscode settings.json.
+```json
+{
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  }
+}
+```
