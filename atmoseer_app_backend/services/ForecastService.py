@@ -1,4 +1,5 @@
 from atmoseer.src.predict_oc import predict_oc
+
 from atmoseer_app_backend.helpers.AsyncExecutor import AsyncExecutor, async_executor
 from atmoseer_app_backend.helpers.GeoStations import GeoStations, geo_stations
 from atmoseer_app_backend.helpers.Logger import logger
