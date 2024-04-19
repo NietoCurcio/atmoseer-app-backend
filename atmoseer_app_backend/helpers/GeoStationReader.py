@@ -36,15 +36,11 @@ class GeoStationReader:
             station["longitude"] = float(station["longitude"])
 
             station["altitude"] = (
-                float(station["altitude"].replace(",", "."))
-                if station["altitude"]
-                else None
+                float(station["altitude"].replace(",", ".")) if station["altitude"] else None
             )
 
             station["start_date"] = (
-                datetime.strptime(station["start_date"], "%d/%m/%Y")
-                if station["start_date"]
-                else None
+                datetime.strptime(station["start_date"], "%d/%m/%Y") if station["start_date"] else None
             )
 
             return Station(**station)
@@ -77,6 +73,4 @@ class GeoStationReader:
             csvfile.close()
 
 
-geo_station_reader = GeoStationReader(
-    "./atmoseer_app_backend/helpers/WeatherStations.csv"
-)
+geo_station_reader = GeoStationReader("./atmoseer_app_backend/helpers/WeatherStations.csv")

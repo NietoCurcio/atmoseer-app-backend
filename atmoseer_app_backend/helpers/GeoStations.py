@@ -16,10 +16,7 @@ class GeoStations(Collection):
 
     def __contains__(self, station_id_or_name: str) -> bool:
         for station in self.geo_station_reader.csv_row_generator():
-            if (
-                station.station_id == station_id_or_name
-                or station.name == station_id_or_name
-            ):
+            if station.station_id == station_id_or_name or station.name == station_id_or_name:
                 return True
         return False
 

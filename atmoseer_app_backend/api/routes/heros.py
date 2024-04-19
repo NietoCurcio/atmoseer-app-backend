@@ -16,9 +16,7 @@ async def read_heros(hero_service: HeroService = Depends(HeroService)):
 
 
 @router.post("/")
-async def create_hero(
-    hero: HeroCreate, hero_service: HeroService = Depends(HeroService)
-) -> HeroOut:
+async def create_hero(hero: HeroCreate, hero_service: HeroService = Depends(HeroService)) -> HeroOut:
     # TODO use Service interface instead of HeroService as type, improve services and repos interfaces
     log.info("Creating hero")
     return hero_service.create(hero)
