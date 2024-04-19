@@ -22,6 +22,13 @@ class ForecastService(AtmoseerService):
         self.geo_stations = geo_stations
         self.async_executor = async_executor
         self.current_workdir = self.workdir_manager.get_current_workdir()
+        self.rain_mapping = {
+            0: "no rain",
+            1: "rain",
+            2: "heavy rain",
+            3: "very heavy rain",
+            4: "extreme rain",
+        }
 
     async def get_data(self, latitude: float, longitude: float):
         try:
@@ -51,7 +58,19 @@ class ForecastService(AtmoseerService):
                 pipeline_id=station.station_id,
                 prediction_task_sufix=prediction_task_sufix,
             )
-            return {"message": f"Prediction result: {predict_result}"}
+            return {
+                "atmoseer_result": {
+                    "prediction_result": predict_result,
+                    "prediction_mapped ": self.rain_mapping[predict_result],
+                    "station": {
+                        "name": station.name,
+                        "situation": station.situation,
+                        "latitude": station.latitude,
+                        "longitude": station.longitude,
+                        "id": station.station_id,
+                    },
+                },
+            }
         except Exception as e:
             workdir = self.workdir_manager.get_current_workdir()
             fn_name = predict_oc.__name__
