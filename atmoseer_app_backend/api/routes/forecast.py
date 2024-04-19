@@ -12,10 +12,8 @@ router = APIRouter()
 
 @router.get("/")
 async def forecast_latitude_longitude(
-    latitude: Annotated[
-        float, Query(description="Latitude to forecast", ge=-90, le=90)
-    ],
-    longitude: Annotated[float, Query(title="Longitude to forecast", ge=-180, le=180)],
+    latitude: Annotated[float, Query(description="Latitude to forecast", ge=-90, le=90)],
+    longitude: Annotated[float, Query(description="Longitude to forecast", ge=-180, le=180)],
 ):
     log.info(f"Forecasting latitude {latitude} and longitude {longitude}")
     return await forecast_service.get_data(latitude, longitude)

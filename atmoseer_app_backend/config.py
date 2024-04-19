@@ -13,9 +13,7 @@ class ENVs(Enum):
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=".env", extra="allow", env_ignore_empty=True
-    )
+    model_config = SettingsConfigDict(env_file=".env", extra="allow", env_ignore_empty=True)
 
     ENV: str = ENVs.DEV.value
     TOKEN_INMET: str | None = None
@@ -39,13 +37,15 @@ class Settings(BaseSettings):
 
     CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
 
+    WEATHER_API_TOKEN: str | None = None
+    OPEN_WEATHER_MAP_TOKEN: str | None = None
+    CLIMA_TEMPO_TOKEN: str | None = None
+
     @model_validator(mode="after")
     def _validate_env(self):
         if self.ENV in ENVs:
             return self
-        logger.get_logger(__name__).warning(
-            f'Invalid ENV: {self.ENV}. Setting to "{ENVs.DEV.value}"'
-        )
+        logger.get_logger(__name__).warning(f'Invalid ENV: {self.ENV}. Setting to "{ENVs.DEV.value}"')
         self.ENV = ENVs.DEV.value
         return self
 
