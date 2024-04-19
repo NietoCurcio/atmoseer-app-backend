@@ -1,6 +1,8 @@
 # Atmoseer app backend
 
-## Get started
+This project is powered by [FastAPI](https://github.com/tiangolo/fastapi) and developed using [Python 3.12](https://www.python.org/downloads/release/python-3123/).
+
+## Get Started
 
 Clone the repository
 ```sh
@@ -13,18 +15,20 @@ Initialize [atmoseer](https://github.com/MLRG-CEFET-RJ/atmoseer) [submodule](htt
 git submodule update --init --progress
 ```
 
+### Setup with poetry (recommended)
+
 Install [poetry](https://github.com/python-poetry/poetry) dependency manager.
   - Linux and macOS
     ```sh
     curl -sSL https://install.python-poetry.org | python3 -
     ```
 
-  - Windows powershell
+  - Windows Powershell
     ```sh
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
     ```
 
-Install project dependencies:
+Install project dependencies. A virtual environment `.venv` folder is automatically created within the project directory by poetry:
 ```sh
 poetry install
 
@@ -34,10 +38,29 @@ poetry install
 # Installing the current project: atmoseer-app-backend (0.1.0)
 ```
 
+### Setup with python venv or virtualenv (optional)
+
+It's also possible to install the application with `pip` using [poetry build backend](https://python-poetry.org/docs/pyproject/#poetry-and-pep-517), please see [Writing your pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#writing-your-pyproject-toml). Setup the application using the python [venv standard library](https://docs.python.org/3/library/venv.html) or [virtualenv tool](https://virtualenv.pypa.io/en/latest/index.html):
+```sh
+python -m venv .venv
+source .venv/bin/activate # use ".venv\Scripts\activate.ps1" in Windows Powershell
+pip install -e .
+# You can execute "deactivate" to deactivate the virtual environment
+```
+
+### Setup with conda (optional)
+
+TODO
+
 Start a local instance of PostgreSQL with [Docker](https://hub.docker.com/_/postgres):
 ```sh
 docker compose up
+# pg-admin is running at http://localhost:5050
 ```
+
+## Running the application
+
+Note, if you setup the application without poetry, just run the commands without `poetry run`. For example, for the alembic command below it should be `alembic upgrade head` since the CLIs are installed in the activated virtual environment. Since poetry also creates a virtual environment, it's also possible to run commands directly (without `poetry run`) with poetry by running `poetry shell` to create a nested shell (enter `exit` to deactivate and exit), please see [using your virtual environment](https://python-poetry.org/docs/basic-usage/#using-your-virtual-environment)
 
 Run [alembic](https://alembic.sqlalchemy.org/en/latest/tutorial.html) database migrations:
 ```sh
@@ -51,12 +74,19 @@ poetry run alembic upgrade head
 ```
 
 Start the server:
-```sh
-poetry run start
-# INFO:     Uvicorn running on http://127.0.0.1:3333 (Press CTRL+C to quit)
-# ...
-# INFO:     Application startup complete.
-```
+
+- Using Poetry:
+    ```sh
+    poetry run start
+    # INFO:     Uvicorn running on http://127.0.0.1:3333 (Press CTRL+C to quit)
+    # ...
+    # INFO:     Application startup complete.
+    ```
+- Using a virtual environment:
+    ```sh
+    python -m atmoseer_app_backend.main
+    ```
+
 
 Documentation
 
