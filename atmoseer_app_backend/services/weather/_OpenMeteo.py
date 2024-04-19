@@ -55,6 +55,8 @@ class _OpenMeteo(WeatherService):
             wind_speed=data["current"]["wind_speed_10m"],
             wind_direction=data["current"]["wind_direction_10m"],
             timestamp=self._to_iso(data["current"]["time"]),
+            latitude=data["latitude"],
+            longitude=data["longitude"],
         )
 
         return weather

@@ -20,3 +20,5 @@ class Weather(BaseModel):
         description="Timestamp of the weather data in ISO 8601 format in UTC",
         example="2024-04-18T19:30:00+00:00",
     )
+    latitude: float = Field(description="Latitude of the weather data", example=-22)
+    longitude: float = Field(description="Longitude of the weather data", example=-43)

@@ -39,6 +39,9 @@ class _ClimaTempo(WeatherService):
         return compass_points.index(wind_direction) * 360 / len(compass_points)
 
     async def get_current_weather(self, lat: float, long: float) -> Weather:
+        """
+        Idk, this api lacks some info, the docs also does not match with real response
+        """
         if self.token is None:
             log.error("ClimaTempo token not found")
             raise Unauthorized("ClimaTempo token not found")
@@ -65,6 +68,8 @@ class _ClimaTempo(WeatherService):
             wind_speed=data["data"]["wind_velocity"],
             wind_direction=self._8_point_compass_to_degrees(data["data"]["wind_direction"]),
             timestamp=timestamp,
+            latitude=lat,
+            longitude=long,
         )
 
         return weather

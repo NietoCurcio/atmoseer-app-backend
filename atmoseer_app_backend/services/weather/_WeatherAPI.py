@@ -131,6 +131,8 @@ class _WeatherAPI(WeatherService):
             wind_speed=data["current"]["wind_kph"],
             wind_direction=wind_direction,
             timestamp=self._to_iso(data["current"]["last_updated"]),
+            latitude=data["location"]["lat"],
+            longitude=data["location"]["lon"],
         )
 
         return weather

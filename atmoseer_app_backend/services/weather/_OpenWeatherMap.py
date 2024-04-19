@@ -69,6 +69,8 @@ class _OpenWeatherMap(WeatherService):
             wind_speed=self._meter_per_second_to_km_per_hour(data["wind"]["speed"]),
             wind_direction=data["wind"]["deg"],
             timestamp=self._timestamp_to_iso(data["dt"]),
+            latitude=data["coord"]["lat"],
+            longitude=data["coord"]["lon"],
         )
 
         return weather
