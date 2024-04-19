@@ -58,6 +58,7 @@ class ForecastService(AtmoseerService):
                 pipeline_id=station.station_id,
                 prediction_task_sufix=prediction_task_sufix,
             )
+            predict_result = int(predict_result)
             return {
                 "atmoseer_result": {
                     "prediction_result": predict_result,
