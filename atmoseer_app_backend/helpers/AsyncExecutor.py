@@ -6,11 +6,11 @@ from concurrent.futures import Executor, ProcessPoolExecutor, ThreadPoolExecutor
 
 class AsyncExecutor:
     @property
-    def THREAD(self):
+    def THREAD(self) -> Executor:
         return ThreadPoolExecutor()
 
     @property
-    def PROCESS(self):
+    def PROCESS(self) -> Executor:
         return ProcessPoolExecutor()
 
     @staticmethod
