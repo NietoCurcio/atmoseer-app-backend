@@ -1,9 +1,10 @@
+import contextlib
+
 from atmoseer.src.predict_oc import predict_oc
 
 from atmoseer_app_backend.helpers.AsyncExecutor import AsyncExecutor, async_executor
 from atmoseer_app_backend.helpers.GeoStations import GeoStations, geo_stations
 from atmoseer_app_backend.helpers.Logger import logger
-from atmoseer_app_backend.helpers.WorkdirManager import WorkdirManager, workdir_manager
 
 from .exceptions import InternalServerError
 from .interfaces import AtmoseerService
@@ -14,14 +15,11 @@ log = logger.get_logger(__name__)
 class ForecastService(AtmoseerService):
     def __init__(
         self,
-        workdir_manager: WorkdirManager,
         geo_stations: GeoStations,
         async_executor: AsyncExecutor,
     ) -> None:
-        self.workdir_manager = workdir_manager
         self.geo_stations = geo_stations
         self.async_executor = async_executor
-        self.current_workdir = self.workdir_manager.get_current_workdir()
         self.rain_mapping = {
             0: "no rain",
             1: "rain",
@@ -30,7 +28,7 @@ class ForecastService(AtmoseerService):
             4: "extreme rain",
         }
 
-    async def get_data(self, latitude: float, longitude: float):
+    def _get_data(self, latitude: float, longitude: float):
         try:
             prediction_task_sufix = "oc"
 
@@ -51,13 +49,11 @@ class ForecastService(AtmoseerService):
                 prediction_task_sufix: {prediction_task_sufix}
             """)
 
-            self.workdir_manager.set_wordkir("atmoseer")
+            with contextlib.chdir("atmoseer"):
+                predict_result = predict_oc(
+                    pipeline_id=station.station_id, prediction_task_sufix=prediction_task_sufix
+                )
 
-            predict_result = await async_executor.execute(
-                predict_oc,
-                pipeline_id=station.station_id,
-                prediction_task_sufix=prediction_task_sufix,
-            )
             predict_result = int(predict_result)
             return {
                 "atmoseer_result": {
@@ -73,13 +69,17 @@ class ForecastService(AtmoseerService):
                 },
             }
         except Exception as e:
-            workdir = self.workdir_manager.get_current_workdir()
-            fn_name = predict_oc.__name__
-            message = f"Error running {fn_name} function in {workdir}"
+            message = f"Error running {predict_oc.__name__} function"
             log.error(f"{message}: {e}")
             raise InternalServerError(message=message, error=e)
-        finally:
-            self.workdir_manager.set_wordkir(str(self.current_workdir))
+
+    async def get_data(self, latitude: float, longitude: float):
+        return await self.async_executor.execute(
+            fn=self._get_data,
+            latitude=latitude,
+            longitude=longitude,
+            executor=self.async_executor.PROCESS,
+        )
 
 
-forecast_service = ForecastService(workdir_manager, geo_stations, async_executor)
+forecast_service = ForecastService(geo_stations, async_executor)

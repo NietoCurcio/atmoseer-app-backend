@@ -117,7 +117,6 @@ atmoseer-app-backend/
     │   ├── GeoStations.py
     │   ├── GreatCircleDistance.py
     │   ├── WeatherStations.csv
-    │   ├── WorkdirManager.py
     │   └── models
     │       └── Station.py
     ├── migrations
