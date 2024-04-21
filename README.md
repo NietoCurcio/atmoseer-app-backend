@@ -28,7 +28,7 @@ Install [poetry](https://github.com/python-poetry/poetry) dependency manager.
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
     ```
 
-Install project dependencies. A virtual environment `.venv` folder is automatically created within the project directory by poetry:
+Install project dependencies. A virtual environment in [`{cache-dir}/virtualenvs`](https://python-poetry.org/docs/configuration/#cache-dir) is automatically created by poetry:
 ```sh
 poetry install
 
