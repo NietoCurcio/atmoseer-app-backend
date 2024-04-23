@@ -58,7 +58,7 @@ class ForecastService(AtmoseerService):
             return {
                 "atmoseer_result": {
                     "prediction_result": predict_result,
-                    "prediction_mapped ": self.rain_mapping[predict_result],
+                    "prediction_mapped": self.rain_mapping[predict_result],
                     "station": {
                         "name": station.name,
                         "situation": station.situation,
