@@ -171,7 +171,7 @@ The source code of the backend is in the `atmoseer_app_backend` folder. The `atm
 
 `WeatherService`
 
-**Class diagram**
+### Class diagram
 
 ```mermaid
 classDiagram
@@ -225,7 +225,7 @@ classDiagram
     WeatherRouteModule ..> Weather
 ```
 
-**Component diagram**
+### Component diagram
 
 ```mermaid
 C4Component
