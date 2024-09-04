@@ -235,12 +235,12 @@ Container(atmoseer_app_frontend, "Atmoseer App Frontend", "React", "Provides the
 
 Container_Boundary(atmoseer_app_backend, "Atmoseer App Backend") {
     Component(api, "API Router", "Fast API Router", "API Routing")
-    Component(repositories, "Repositories", "Python Module", "Database access")
-    Component(models, "Models", "Python Module", "Database models")
-    Component(services, "Services", "Python Module", "Atmoseer processing and data retrieval")
+    Component(repositories, "Repositories", "Python Package", "Database access")
+    Component(models, "Models", "Python Package", "Database models")
+    Component(services, "Services", "Python Package", "Atmoseer processing and data retrieval")
     Container(atmoseer, "Atmoseer", "Python Project", "ML algorithms developed by the Artificial Intelligence Research Group and Laboratory CEFET/RJ")
-    Container_Ext(weather_apis, "Weather APIs", "Python Module", "Handles weather data retrieval")
-    Component(helpers, "Helpers", "Python Module", "Utility functions for services")
+    Container_Ext(weather_apis, "Weather APIs", "Python Package", "Handles weather data retrieval")
+    Component(helpers, "Helpers", "Python Package", "Utility functions for services")
     
     Rel(api, services, "Depends on", "Invokes services")
     Rel(services, repositories, "Uses", "Data access")
