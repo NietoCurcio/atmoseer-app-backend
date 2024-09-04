@@ -299,3 +299,9 @@ We can use [Ruff vscode extension](https://github.com/astral-sh/ruff-vscode). Af
   }
 }
 ```
+
+## Related video
+
+Video presenting the Atmoseer app backend execution and the main functionalities:
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/y0nrW35oIyU/0.jpg)](https://www.youtube.com/watch?v=y0nrW35oIyU)
