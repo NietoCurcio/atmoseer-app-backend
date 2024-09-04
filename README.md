@@ -97,60 +97,167 @@ Documentation
 
 ```
 atmoseer-app-backend/
-├── .env.example
-├── .gitmodules
+├── README.md
 ├── alembic.ini
 ├── docker-compose.yml
 ├── poetry.lock
 ├── pyproject.toml
-├── README.md
-├── atmoseer
-└── atmoseer_app_backend
-    ├── main.py
+└── atmoseer_app_backend/
     ├── app.py
     ├── config.py
-    ├── helpers
-    │   ├── Logger.py
-    │   ├── PathHelper.py
+    ├── main.py
+    ├── api/
+    │   ├── router.py
+    │   └── routes/
+    │       ├── forecast.py
+    │       ├── heros.py
+    │       └── weather.py
+    ├── helpers/
     │   ├── AsyncExecutor.py
     │   ├── GeoStationReader.py
     │   ├── GeoStations.py
     │   ├── GreatCircleDistance.py
+    │   ├── Logger.py
     │   ├── WeatherStations.csv
-    │   └── models
+    │   └── models/
     │       └── Station.py
-    ├── migrations
-    │   └── alembic
+    ├── migrations/
+    │   └── alembic/
+    │       ├── README
     │       ├── env.py
-    │       └── versions
-    ├── models
+    │       ├── script.py.mako
+    │       └── versions/
+    │           └── 76213b2e56df_create_hero_table.py
+    ├── models/
     │   └── Hero.py
-    ├── repositories
+    ├── repositories/
     │   ├── HeroRepository.py
-    │   ├── database
+    │   ├── database/
     │   │   └── database.py
-    │   └── interfaces
+    │   └── interfaces/
     │       └── Repository.py
-    ├── services
-    │   ├── ForecastService.py
-    │   ├── HeroService.py
-    │   ├── exceptions
-    │   │   └── exceptions.py
-    │   └── interfaces
-    │       ├── AtmoseerService.py
-    │       └── Service.py
-    └── api
-        ├── router.py
-        └── routes
-            ├── forecast.py
-            └── heros.py
+    └── services/
+        ├── ForecastService.py
+        ├── HeroService.py
+        ├── exceptions/
+        │   ├── BaseHTTPException.py
+        │   └── exceptions.py
+        ├── interfaces/
+        │   ├── AtmoseerService.py
+        │   └── Service.py
+        └── weather/
+            ├── Weather.py
+            ├── _ClimaTempo.py
+            ├── _OpenMeteo.py
+            ├── _OpenWeatherMap.py
+            ├── _WeatherAPI.py
+            ├── interfaces/
+            │   └── WeatherService.py
+            └── models/
+                └── Weather.py
 ```
 
 The source code of the backend is in the `atmoseer_app_backend` folder. The `atmoseer` folder is a submodule, it has its own git repostiory at [NietoCurcio/atmoseer Github](https://github.com/NietoCurcio/atmoseer). The `atmoseer` submodule is necessary to use the machine learning algorithms developed by the CEFET-RJ Machine Learning Research Group.
 
 - Endpoints
 
+`/forecast`
+
+`/weather` and `/weather/services`
+
 - Services
+
+`ForecastService`
+
+`WeatherService`
+
+**Class diagram**
+
+```mermaid
+classDiagram
+    class AtmoseerService {
+        <<interface>>
+        +get_data()
+    }
+
+    class ForecastService {
+        +get_data()
+    }
+    
+    AtmoseerService <|.. ForecastService
+
+    class WeatherService {
+        <<interface>>
+        +get_current_weather()
+    }
+
+    class Weather {
+        +Weather(_OpenMeteo, _ClimaTempo, _OpenWeatherMap, _WeatherAPI)
+    }
+
+    class _OpenMeteo {
+        +get_current_weather()
+    }
+
+    class _ClimaTempo {
+        +get_current_weather()
+    }
+
+    class _OpenWeatherMap {
+        +get_current_weather()
+    }
+
+    class _WeatherAPI {
+        +get_current_weather()
+    }
+
+    WeatherService <|.. _OpenMeteo
+    WeatherService <|.. _ClimaTempo
+    WeatherService <|.. _OpenWeatherMap
+    WeatherService <|.. _WeatherAPI
+
+    Weather ..> WeatherService
+
+    ForecastRouteModule : api/routes/forecast.py
+    WeatherRouteModule : api/routes/weather.py
+
+    ForecastRouteModule ..> AtmoseerService
+    WeatherRouteModule ..> Weather
+```
+
+**Component diagram**
+
+```mermaid
+C4Component
+title Atmoseer App Components
+
+Container(atmoseer_app_frontend, "Atmoseer App Frontend", "React", "Provides the frontend functionality for the Atmoseer App")
+
+Container_Boundary(atmoseer_app_backend, "Atmoseer App Backend") {
+    Component(api, "API Router", "Fast API Router", "API Routing")
+    Component(repositories, "Repositories", "Python Module", "Database access")
+    Component(models, "Models", "Python Module", "Database models")
+    Component(services, "Services", "Python Module", "Atmoseer processing and data retrieval")
+    Container(atmoseer, "Atmoseer", "Python", "ML algorithms developed by the Artificial Intelligence Research Group and Laboratory CEFET/RJ")
+    Container(weather_apis, "Weather APIs", "Python Module", "Handles weather data retrieval")
+    Component(helpers, "Helpers", "Python Module", "Utility functions for services")
+    
+    Rel(api, services, "Depends on", "Invokes services")
+    Rel(services, repositories, "Uses", "Data access")
+    Rel(repositories, models, "Uses", "Database models")
+    Rel(services, helpers, "Uses", "Helpers")
+    Rel(services, atmoseer, "Calls", "Calls ML functions")
+    Rel(services, weather_apis, "Uses", "fetch weather data")
+
+    UpdateRelStyle(services, atmoseer, $offsetY="10", $offsetX="-80")
+
+    Container_Boundary(alembic, "Alembic", "Python Tool", "Handles database migrations") {
+        Component(migrations, "Migrations", "Migration Scripts", "Scripts for modifying database schema")
+    }
+}
+
+Rel(atmoseer_app_frontend, api, "API Calls", "Communicates via API endpoints")
+```
 
 ## Technologies
 
