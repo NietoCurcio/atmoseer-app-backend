@@ -1,6 +1,14 @@
-version: '3.5'
+version: '3.8'
 
 services:
+  atmoseer-backend:
+    build:
+      context: ./
+    volumes:
+      - ./atmoseer:/backend
+    ports:
+      - "3333:3333"
+    network_mode: host
   postgres:
     container_name: postgres_container
     image: postgres:alpine3.19

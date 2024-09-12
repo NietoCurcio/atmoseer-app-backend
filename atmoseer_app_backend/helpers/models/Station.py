@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Union
 
 from pydantic import BaseModel
 
@@ -9,6 +10,6 @@ class Station(BaseModel):
     situation: str
     latitude: float
     longitude: float
-    altitude: float | None = None
-    start_date: datetime | None = None
+    altitude: Union[float, None] = None
+    start_date: Union[datetime, None] = None
     station_id: str

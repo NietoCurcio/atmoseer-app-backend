@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Union
 
 from pydantic import PostgresDsn, model_validator
 from pydantic_core import MultiHostUrl
@@ -16,7 +17,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="allow", env_ignore_empty=True)
 
     ENV: str = ENVs.DEV.value
-    TOKEN_INMET: str | None = None
+    TOKEN_INMET: Union[str, None] = None
 
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "changeme"
@@ -35,11 +36,11 @@ class Settings(BaseSettings):
         path=POSTGRES_DB,
     )
 
-    CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://localhost:3000"]
+    CORS_ORIGINS: list[str] = ["*", "http://localhost:5173", "http://localhost:3000"]
 
-    WEATHER_API_TOKEN: str | None = None
-    OPEN_WEATHER_MAP_TOKEN: str | None = None
-    CLIMA_TEMPO_TOKEN: str | None = None
+    WEATHER_API_TOKEN: Union[str, None] = None
+    OPEN_WEATHER_MAP_TOKEN: Union[str, None] = None
+    CLIMA_TEMPO_TOKEN: Union[str, None] = None
 
     @model_validator(mode="after")
     def _validate_env(self):

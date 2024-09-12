@@ -2,6 +2,7 @@ import csv
 from collections.abc import Generator
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 from .Logger import logger
 from .models.Station import Station
@@ -50,7 +51,7 @@ class GeoStationReader:
 
     def csv_row_generator(
         self,
-        file_path: str | None = None,
+        file_path: Union[str, None] = None,
         skip_header: bool = True,
         ignore_first_column: bool = True,
     ) -> Generator[Station, None, None]:
